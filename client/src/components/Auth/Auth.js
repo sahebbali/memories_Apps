@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector} from 'react-redux';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
@@ -15,6 +15,7 @@ import isValidEmail from "../../utils/isValidEmail";
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const SignUp = () => {
+  const { isLoggedIn } = useSelector(state => state.auth);
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const [error, setError]=useState("");
@@ -33,7 +34,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
         e.preventDefault();
-        const { isLoggedIn } = useSelector(state => state.auth);
+       
  
    if(!isValidEmail(form.email))
     {
